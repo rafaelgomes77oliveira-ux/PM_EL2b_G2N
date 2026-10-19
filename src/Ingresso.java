@@ -59,7 +59,7 @@ public abstract class Ingresso {
 	/**
 	 * Lista de adicionais vinculados ao ingresso.
 	 */
-	private List<EAdicional> adicionais;
+	protected List<EAdicional> adicionais;
 
 	/**
 	 * Constrói um ingresso com filme e sessão.
@@ -83,6 +83,15 @@ public abstract class Ingresso {
 		this.filme = filme;
 		this.sessao = sessao;
 		adicionais = new LinkedList<>();
+	}
+
+
+	protected double valorAdicionais(){
+		double totalDosAdicionais = 0;
+		for(EAdicional adicional : adicionais){
+			totalDosAdicionais += adicional.valor();
+		}
+		return totalDosAdicionais;
 	}
 
 	/**
@@ -109,6 +118,14 @@ public abstract class Ingresso {
 	 */
 	public abstract double valorIngresso();
 
+	public String stringAdicionais(){
+		String resposta = "";
+		for(EAdicional adicional : adicionais){
+			resposta += adicional.toString() + String.valueOf(adicional.valor()) + "\n";
+		}
+		return resposta;
+	}
+
 	/**
 	 * Gera a representação textual (cupom) do ingresso.
 	 *
@@ -118,7 +135,12 @@ public abstract class Ingresso {
 	 */
 	@Override 
 	public String toString() {
-		//TODO
-		return "";
+		String IngressoValue = String.valueOf(valorIngresso());
+		String resposta = String.format("filme : %s \ndata: %s\nadicionais: ", filme, String.valueOf(sessao) );
+		resposta += stringAdicionais();
+		resposta += "Valor Total: " + IngressoValue;
+
+	  	
+		return resposta;
 	}
 }

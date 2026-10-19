@@ -50,7 +50,16 @@ public class Clube extends Ingresso {
 	 * @param clube categoria do clube utilizada para definir os descontos
 	 */
 	public Clube(String filme, LocalDateTime sessao, EClube clube) {
-		//TODO
+		super(filme, sessao);
+		categoria = clube;
+	}
+
+	private double calcularDescontos(){
+		double valor = 0;
+		valor += valorAdicionais() * categoria.descontoAdicionais();
+		valor += VALOR_ENTRADA * categoria.descontoEntrada();
+		return valor;
+
 	}
 
 	/**
@@ -59,7 +68,7 @@ public class Clube extends Ingresso {
 	 */
 	@Override 
 	public double valorIngresso() {
-		//TODO
-		return  0;
+			return calcularDescontos();
+		};
+		
 	}
-}

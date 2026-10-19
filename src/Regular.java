@@ -52,7 +52,6 @@ public class Regular extends Ingresso {
 	 * @return valor final do ingresso regular
 	 */
 	public double valorIngresso() {
-		//TODO
-		return  0;
+		return  VALOR_ENTRADA + valorAdicionais();
 	}
 }
